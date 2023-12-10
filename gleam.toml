@@ -12,6 +12,7 @@ version = "0.1.0"
 [dependencies]
 gleam_stdlib = "~> 0.32"
 gladvent = "~> 0.6"
+gleam_community_maths = "~> 1.0"
 
 [dev-dependencies]
 gleeunit = "~> 1.0"

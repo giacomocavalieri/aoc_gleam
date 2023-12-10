@@ -26,14 +26,14 @@ pub fn from(start: Int, to end: Int) -> Range {
 
 // --- QUERYING A RANGE --------------------------------------------------------
 
-pub fn is_empty(range: Range) {
+pub fn is_empty(range: Range) -> Bool {
   case range {
     Empty -> True
     Range(..) -> False
   }
 }
 
-pub fn is_not_empty(range: Range) {
+pub fn is_not_empty(range: Range) -> Bool {
   !is_empty(range)
 }
 
@@ -52,6 +52,13 @@ pub fn overlaps(range: Range, with other: Range) -> Bool {
       || contains(range, other_end)
       || contains(other, one_start)
       || contains(other, one_end)
+  }
+}
+
+pub fn size(range: Range) -> Int {
+  case range {
+    Range(start, end) -> end - start + 1
+    Empty -> 0
   }
 }
 

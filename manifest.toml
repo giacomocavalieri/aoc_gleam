@@ -17,5 +17,6 @@ packages = [
 
 [requirements]
 gladvent = { version = "~> 0.6" }
+gleam_community_maths = { version = "~> 1.0" }
 gleam_stdlib = { version = "~> 0.32" }
 gleeunit = { version = "~> 1.0" }

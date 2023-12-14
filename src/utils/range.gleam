@@ -1,5 +1,5 @@
 import gleam/iterator.{type Iterator}
-import gleam/list
+import gleam/list.{type ContinueOrStop, Continue, Stop}
 
 // --- RANGE TYPE --------------------------------------------------------------
 
@@ -75,6 +75,33 @@ fn do_fold(start: Int, end: Int, acc: a, fun: fn(a, Int) -> a) -> a {
   case start > end {
     True -> acc
     False -> do_fold(start + 1, end, fun(acc, start), fun)
+  }
+}
+
+pub fn fold_until(
+  over range: Range,
+  from acc: a,
+  with fun: fn(a, Int) -> ContinueOrStop(a),
+) -> a {
+  case range {
+    Empty -> acc
+    Range(start, end) -> do_fold_until(start, end, acc, fun)
+  }
+}
+
+fn do_fold_until(
+  start: Int,
+  end: Int,
+  acc: a,
+  fun: fn(a, Int) -> ContinueOrStop(a),
+) -> a {
+  case start > end {
+    True -> acc
+    False ->
+      case fun(acc, start) {
+        Continue(new_acc) -> do_fold_until(start + 1, end, new_acc, fun)
+        Stop(final_state) -> final_state
+      }
   }
 }
 

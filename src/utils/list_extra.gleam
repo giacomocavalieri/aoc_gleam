@@ -32,3 +32,10 @@ pub fn compare(
       }
   }
 }
+
+pub fn update(list: List(a), at index: Int, with fun: fn(a) -> a) -> List(a) {
+  case list.split(list, at: index) {
+    #(left, [elem, ..rest]) -> list.append(left, [fun(elem), ..rest])
+    #(_, []) -> list
+  }
+}
